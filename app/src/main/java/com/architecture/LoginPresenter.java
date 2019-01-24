@@ -24,6 +24,9 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
     public static final int ERROR_NAME = 1;
     public static final int ERROR_PASS = 2;
 
+    /**
+     * 登录
+     */
     public void login() {
         String loginName = getView().getLoginName();
         String loginPassword = getView().getLoginPassword();
