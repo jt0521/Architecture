@@ -1,4 +1,4 @@
-package com.architecture;
+package com.architecture.login;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.architecture.R;
 import com.mvplib.view.activity.MvpActivity;
 
 public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginContactView, View.OnClickListener {
@@ -22,6 +23,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginC
         mPasswordEt = findViewById(R.id.password_et);
         mLoginBtn = findViewById(R.id.login_btn);
         mLoginBtn.setOnClickListener(this);
+        mPresenter.readCache();
     }
 
     @Override
@@ -36,6 +38,12 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginC
                 mPresenter.login();
                 break;
         }
+    }
+
+    @Override
+    public void readCache(UserInfo userInfo) {
+        mNameEt.setText(userInfo.name);
+        mPasswordEt.setText(userInfo.password);
     }
 
     @Override

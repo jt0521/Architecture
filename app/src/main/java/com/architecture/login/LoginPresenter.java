@@ -1,7 +1,8 @@
-package com.architecture;
+package com.architecture.login;
 
 import android.text.TextUtils;
 
+import com.architecture.data.LoginData;
 import com.mvplib.presenter.BasePresenter;
 
 /**
@@ -9,7 +10,7 @@ import com.mvplib.presenter.BasePresenter;
  * <p>
  * 版权所有
  * <p>
- * 功能描述：
+ * 功能描述：逻辑处理
  * <p>
  * <p>
  * 作者：Created by tgl on 2019/1/23.
@@ -23,6 +24,16 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
 
     public static final int ERROR_NAME = 1;
     public static final int ERROR_PASS = 2;
+
+    /**
+     * 缓存读取
+     */
+    public void readCache() {
+        UserInfo userInfo = LoginData.getUserData(getView());
+        if (userInfo != null) {
+            getView().readCache(userInfo);
+        }
+    }
 
     /**
      * 登录
@@ -40,6 +51,10 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
         }
         if (getView() != null) {
             if (TextUtils.equals(loginName, loginPassword)) {
+                UserInfo userInfo = new UserInfo();
+                userInfo.name = loginName;
+                userInfo.password = loginPassword;
+                LoginData.saveUserData(getView(), userInfo);
                 getView().loginSuccess();
             } else {
                 getView().loginFailure();

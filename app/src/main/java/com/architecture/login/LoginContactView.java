@@ -1,4 +1,4 @@
-package com.architecture;
+package com.architecture.login;
 
 import com.mvplib.view.IView;
 
@@ -18,6 +18,8 @@ import com.mvplib.view.IView;
  */
 
 public interface LoginContactView extends IView {
+
+    void readCache(UserInfo userInfo);
 
     String getLoginName();
 
